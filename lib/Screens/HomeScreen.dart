@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
-
+  static final _auth = FirebaseAuth.instance;
   @override
   void initState() {
     super.initState();
@@ -57,19 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.blue,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
+
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -77,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                height: 450,
+                height: 350,
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
@@ -100,13 +88,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.blue,
                           fontSize: 23,
                           fontWeight: FontWeight.w600,
-                        )
-                    ),
-
+                        )),
                     ActionChip(
                         label: Text("Logout"),
                         onPressed: () {
-                          logou(context);
+                          logout();
                         }),
                   ],
                 ),
@@ -168,14 +154,19 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-// the logout function
-  Future<void> logou(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-    Fluttertoast.showToast(msg: "Logged out succesfully");
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
-  }
 
+// the logout function
+  Future<void> logout() async {
+    // await FirebaseAuth.instance.signOut();
+    // Fluttertoast.showToast(msg: "Logged out succesfully");
+    // Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(builder: (context) => LoginScreen()));
+    try {
+      _auth.signOut();
+    } catch (e) {
+      print(e);
+    }
+  }
 }
 
 class HeaderCurvedContainer extends CustomPainter {
