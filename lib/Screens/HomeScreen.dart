@@ -32,11 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget textfield({@required hintText}) {
     return Material(
-      elevation: 4,
-      shadowColor: Colors.blue,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
+
       child: TextField(
         decoration: InputDecoration(
             hintText: hintText,
@@ -57,7 +53,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        // App Bar
+        title: Text(
+          "Profile",
+          style: TextStyle(color: Colors.white),
+        ),
 
+        elevation: 0,
+        backgroundColor: Colors.blue,
+      ),
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -74,19 +83,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text("${loggedInUser.firstName}",
                         style: TextStyle(
                           color: Colors.blue,
-                          fontSize: 23,
+                          fontSize: 30,
                           fontWeight: FontWeight.w600,
                         )),
                     Text("${loggedInUser.secondName}",
                         style: TextStyle(
                           color: Colors.blue,
-                          fontSize: 23,
+                          fontSize: 30,
                           fontWeight: FontWeight.w600,
                         )),
                     Text("${loggedInUser.email}",
                         style: TextStyle(
                           color: Colors.blue,
-                          fontSize: 23,
+                          fontSize: 30,
                           fontWeight: FontWeight.w600,
                         )),
                     ActionChip(
