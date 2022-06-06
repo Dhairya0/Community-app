@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cached_network_image: ^3.2.1
   carousel_slider: ^4.1.1
   cloud_firestore: ^3.1.17
   cupertino_icons: ^1.0.2
@@ -36,10 +37,12 @@ dependencies:
   firebase_storage: ^10.2.16
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.2
   flutter_speed_dial: ^6.0.0
   fluttertoast: ^8.0.9
   gsheets: ^0.4.2
   image_picker: ^0.8.5+3
+  transparent_image: ^2.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -61,6 +64,8 @@ flutter:
     - assets/signup.png
     - assets/profile.png
     - assets/event.png
+    - assets/posts.png
+    - assets/news.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

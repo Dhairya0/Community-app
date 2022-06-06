@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-class ViewPost extends StatefulWidget {
-  const ViewPost({Key? key}) : super(key: key);
+class News extends StatefulWidget {
+  const News({Key? key}) : super(key: key);
 
   @override
-  State<ViewPost> createState() => _ViewPostState();
+  State<News> createState() => _NewsState();
 }
 
-class _ViewPostState extends State<ViewPost> {
+class _NewsState extends State<News> {
   var imgList = [
-    "assets/posts.png",
-    "assets/posts.png",
-    "assets/posts.png",
-    "assets/posts.png",
-    "assets/posts.png",
-    "assets/posts.png",
-    "assets/posts.png",
+    "assets/news.png",
+    "assets/news.png",
+    "assets/news.png",
+    "assets/news.png",
+    "assets/news.png",
+    "assets/news.png",
+    "assets/news.png",
   ];
   var descList = [
     "Push yourself, because no one else is going to do it for you.",
@@ -32,7 +32,7 @@ class _ViewPostState extends State<ViewPost> {
       appBar: AppBar(
         // App Bar
         title: Text(
-          "Posts",
+          "News",
           style: TextStyle(color: Colors.blue),
         ),
         elevation: 0,
