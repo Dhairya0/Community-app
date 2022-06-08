@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
       //     ),
       //   ),
       // ),
-      body: [ViewPost(),RouteOne(), News(),ViewScreen(), EventPage(), FormFour(), HomeScreen()]
+      body: [ViewPost(),Gallery(), News(),ViewScreen(), EventPage(), FormFour(), HomeScreen()]
           .elementAt(_selectedTab),
       bottomNavigationBar: CupertinoTabBar(
         onTap: (index) {
@@ -61,12 +61,12 @@ class _MainScreenState extends State<MainScreen> {
         activeColor: Color(0xff00acee),
         currentIndex: _selectedTab,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home)),
-          BottomNavigationBarItem(icon: Icon(Icons.home)),
+          BottomNavigationBarItem(icon: Icon(Icons.post_add)),
+          BottomNavigationBarItem(icon: Icon(Icons.image)),
           BottomNavigationBarItem(icon: Icon(Icons.newspaper)),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_today_rounded)),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_today_rounded)),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_today_rounded)),
+          BottomNavigationBarItem(icon: Icon(Icons.feedback)),
           BottomNavigationBarItem(icon: Icon(Icons.person)),
         ],
       ),

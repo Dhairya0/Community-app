@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'Feedback.dart';
 import '../db_model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final loginButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.blue,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(15, 20, 15, 20),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => FormFour()));
+        },
+        child: Text(
+          "Give Your Feedback!",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 10, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -74,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                height: 350,
+                height: 250,
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
@@ -98,6 +120,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 30,
                           fontWeight: FontWeight.w600,
                         )),
+                    SizedBox(height: 20),
+                    loginButton,
                     ActionChip(
                         label: Text("Logout"),
                         onPressed: () {
