@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class ViewPost extends StatefulWidget {
   const ViewPost({Key? key}) : super(key: key);
@@ -8,6 +12,7 @@ class ViewPost extends StatefulWidget {
 }
 
 class _ViewPostState extends State<ViewPost> {
+  late final dbRef = FirebaseFirestore.instance.collection('Posts').get();
   var imgList = [
     "assets/posts.png",
     "assets/posts.png",
