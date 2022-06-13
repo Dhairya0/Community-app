@@ -57,7 +57,42 @@ class _NewsState extends State<News> {
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, int index){
-                return Text(snapshot.data!.docs[index]['Title']);
+                // return Text(snapshot.data!.docs[index]['Title']);
+                return Card(
+                  elevation: 1.5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ListTile(
+                      title: Row(
+                        children: <Widget>[
+                          // Container(
+                          //   width: 60,
+                          //   height: 60,
+                          //   decoration: BoxDecoration(
+                          //
+                          //       borderRadius: BorderRadius.circular(60/2),
+                          //       image: DecorationImage(
+                          //           fit: BoxFit.cover,
+                          //           image: Image.asset("assets/news.png");
+                          //       )
+                          //   ),
+                          // ),
+                          SizedBox(width: 20,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.width-140,
+                                  child: Text(snapshot.data!.docs[index]['Title'],style: TextStyle(fontSize: 17,color: Colors.blue),)),
+                              SizedBox(height: 10,),
+                              Text(snapshot.data!.docs[index]['Desc'],style: TextStyle(color: Colors.blue),)
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
           });
         },
       ),

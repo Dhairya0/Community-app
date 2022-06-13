@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class EventPage extends StatefulWidget {
@@ -10,6 +11,7 @@ _EventPageState createState() => _EventPageState();
 
 class _EventPageState extends State<EventPage> {
   // a list of images' URLs
+  var db = FirebaseFirestore.instance.collection("Events").snapshots();
   final List data = [
     {
 

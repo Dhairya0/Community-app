@@ -50,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
       //     ),
       //   ),
       // ),
-      body: [ViewPost(),Gallery(), News(),ViewScreen(), EventPage(), FormFour(), HomeScreen()]
+      body: [Posts(),Gallery(), News(),ViewScreen(), EventPage(), FormFour(), HomeScreen()]
           .elementAt(_selectedTab),
       bottomNavigationBar: CupertinoTabBar(
         onTap: (index) {

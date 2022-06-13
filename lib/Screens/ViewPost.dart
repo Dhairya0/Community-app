@@ -1,36 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../db_model/news.dart';
 
 
-class ViewPost extends StatefulWidget {
-  const ViewPost({Key? key}) : super(key: key);
+class Posts extends StatefulWidget {
+  const Posts({Key? key}) : super(key: key);
 
   @override
-  State<ViewPost> createState() => _ViewPostState();
+  State<Posts> createState() => _PostsState();
 }
 
-class _ViewPostState extends State<ViewPost> {
-  late final dbRef = FirebaseFirestore.instance.collection('Posts').get();
-  var imgList = [
-    "assets/posts.png",
-    "assets/posts.png",
-    "assets/posts.png",
-    "assets/posts.png",
-    "assets/posts.png",
-    "assets/posts.png",
-    "assets/posts.png",
-  ];
-  var descList = [
-    "Push yourself, because no one else is going to do it for you.",
-    "Your limitation—it's only your imagination.",
-    "Hard Work changes the life.",
-    "Sometimes it's the smallest decisions that can change your life forever.",
-    "Confidence is the most beautiful thing you can possess",
-    "A big business starts small.",
-    "Talent wins games, but teamwork and intelligence win championships."
-  ];
+class _PostsState extends State<Posts> {
+  var db = FirebaseFirestore.instance.collection("Posts").snapshots();
+  NewsModel news = NewsModel();
+  void initState() {
+    super.initState();
+
+  }
+  // var imgList = [
+  //   "assets/news.png",
+  //   "assets/news.png",
+  //   "assets/news.png",
+  //   "assets/news.png",
+  //   "assets/news.png",
+  //   "assets/news.png",
+  //   "assets/news.png",
+  // ];
+  // var descList = [
+  //   "Push yourself, because no one else is going to do it for you.",
+  //   "Your limitation—it's only your imagination.",
+  //   "Hard Work changes the life.",
+  //   "Sometimes it's the smallest decisions that can change your life forever.",
+  //   "Confidence is the most beautiful thing you can possess",
+  //   "A big business starts small.",
+  //   "Talent wins games, but teamwork and intelligence win championships."
+  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,48 +45,58 @@ class _ViewPostState extends State<ViewPost> {
           "Posts",
           style: TextStyle(color: Colors.blue),
         ),
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      // Main List View With Builder
-      body: ListView.builder(
-        itemCount: imgList.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              // This Will Call When User Click On ListView Item
-              //showDialogFunc(context, imgList[index], titleList[index], descList[index]);
-            },
-            // Card Which Holds Layout Of ListView Item
-            child: Card(
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    height: 100,
-                    child: Image.asset(imgList[index]),
-                  ),
-                  Padding(
+
+      body: StreamBuilder<QuerySnapshot>(
+        stream: db,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return CircularProgressIndicator();
+          return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, int index){
+                // return Text(snapshot.data!.docs[index]['Title']);
+                return Card(
+                  elevation: 1.5,
+                  child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          width: 100,
-                          child: Text(
-                            descList[index],
-                            maxLines: 3,
-                            style: TextStyle(fontSize: 15, color: Colors.blue),
+                    child: ListTile(
+                      title: Row(
+                        children: <Widget>[
+                          Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                                // color: primary,
+                                borderRadius: BorderRadius.circular(60/2),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(snapshot.data!.docs[index]['PostImage'])
+                                )
+                            ),
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 20,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.width-140,
+                                  child: Text(snapshot.data!.docs[index]['Quote'],style: TextStyle(fontSize: 17,color: Colors.blue),)),
+                              SizedBox(height: 10,),
+                              // Text(snapshot.data!.docs[index]['Desc'],style: TextStyle(color: Colors.blue),)
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  )
-                ],
-              ),
-            ),
-          );
+                  ),
+                );
+              });
         },
       ),
+
     );
   }
 }

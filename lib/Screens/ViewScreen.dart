@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/model/form.dart';
 // import 'package:communityapp/db_model/data.dart';
 
@@ -8,6 +9,7 @@ class ViewScreen extends StatefulWidget {
 }
 
 class _ViewScreenState extends State<ViewScreen> {
+  var db = FirebaseFirestore.instance.collection("Events").snapshots();
   @override
   void initState() {
     // TODO: implement initState
@@ -26,102 +28,76 @@ class _ViewScreenState extends State<ViewScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
       ),
-      body: Container(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(color: Colors.white),
-            ),
-            SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-
-                    Text(
-                      "Popular Events",
-                      style: TextStyle(color: Colors.blue, fontSize: 20),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Container(
-                      height: 100,
-                      margin: EdgeInsets.only(bottom: 16),
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Row(
+      body: StreamBuilder<QuerySnapshot>(
+        stream: db,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return CircularProgressIndicator();
+          return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, int index){
+                // return Text(snapshot.data!.docs[index]['Title']);
+                return Card(
+                  elevation: 1.5,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ListTile(
+                      title: Row(
                         children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.only(left: 16),
-                              width: MediaQuery.of(context).size.width - 100,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    "Event 1",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 25),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Icon(Icons.calendar_today_rounded),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        "12-06-2022",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Icon(Icons.location_on),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        "Prahlad nagar,A'bad",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 15),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
+                          Container(
+                            width: 60,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              // color: primary,
+                                borderRadius: BorderRadius.circular(60/2),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(snapshot.data!.docs[index]['EventImage'])
+                                )
                             ),
                           ),
-                          ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(8),
-                                  bottomRight: Radius.circular(8)),
-                              child: Image.asset(
-                                "assets/event.png",
-                                height: 100,
-                                width: 120,
-                                fit: BoxFit.cover,
-                              )),
+                          SizedBox(width: 20,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(
+                                  width: MediaQuery.of(context).size.width-140,
+                                  child: Text(snapshot.data!.docs[index]['Title'],style: TextStyle(fontSize: 17,color: Colors.blue),)),
+                              SizedBox(height: 5,),
+                              // Icon(Icons.calendar_month),
+                              // Text(snapshot.data!.docs[index]['Date'],style: TextStyle(color: Colors.blue),),
+                              SizedBox(
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.calendar_today_rounded),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(snapshot.data!.docs[index]['Date'],style: TextStyle(color: Colors.blue),),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.location_on),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(snapshot.data!.docs[index]['Location'],style: TextStyle(color: Colors.blue),),
+                                  ],
+                                ),
+                              ),
+                               // Icon(Icons.location_on),
+                               // Text(snapshot.data!.docs[index]['Location'],style: TextStyle(color: Colors.blue),),
+                            ],
+                          )
                         ],
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+                    ),
+                  ),
+                );
+              });
+        },
       ),
     );
   }
