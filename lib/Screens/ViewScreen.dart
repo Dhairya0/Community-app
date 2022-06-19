@@ -1,3 +1,5 @@
+import 'package:communityapp/Screens/EventPage.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/model/form.dart';
@@ -10,11 +12,13 @@ class ViewScreen extends StatefulWidget {
 
 class _ViewScreenState extends State<ViewScreen> {
   var db = FirebaseFirestore.instance.collection("Events").snapshots();
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +35,17 @@ class _ViewScreenState extends State<ViewScreen> {
       body: StreamBuilder<QuerySnapshot>(
         stream: db,
         builder: (context, snapshot) {
+
           if (!snapshot.hasData) return CircularProgressIndicator();
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, int index){
+                DocumentSnapshot documentSnapshot = snapshot.data!.docs[index];
+                // String Desc = snapshot.data!.docs[index]['Desc'];
+                // String Location = snapshot.data!.docs[index]['Location'];
+                // String Date = snapshot.data!.docs[index]['Date'];
+                // String Address = snapshot.data!.docs[index]['Address'];
+                // String Image = snapshot.data!.docs[index]['EventImage'];
                 // return Text(snapshot.data!.docs[index]['Title']);
                 return Card(
                   elevation: 1.5,
@@ -51,7 +62,7 @@ class _ViewScreenState extends State<ViewScreen> {
                                 borderRadius: BorderRadius.circular(60/2),
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(snapshot.data!.docs[index]['EventImage'])
+                                    image: NetworkImage(documentSnapshot['EventImage'])
                                 )
                             ),
                           ),
@@ -93,6 +104,7 @@ class _ViewScreenState extends State<ViewScreen> {
                           )
                         ],
                       ),
+                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> EventPage(documentSnapshot: documentSnapshot)))
                     ),
                   ),
                 );

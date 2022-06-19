@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:communityapp/db_model/AboutUs.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'Feedback.dart';
 import '../db_model/user.dart';
@@ -7,26 +8,26 @@ import 'package:flutter/material.dart';
 
 import 'LoginScreen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class AboutUs extends StatefulWidget {
+  const AboutUs({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _AboutUsState createState() => _AboutUsState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+class _AboutUsState extends State<AboutUs> {
+  // User? user = FirebaseAuth.instance.currentUser;
+  AboutUsModel loggedInUser = AboutUsModel();
   static final _auth = FirebaseAuth.instance;
   @override
   void initState() {
     super.initState();
     FirebaseFirestore.instance
-        .collection("users")
-        .doc(user!.uid)
+        .collection("AboutUs")
+        .doc("EbTR08cs6zdtRiSVN81d")
         .get()
         .then((value) {
-      this.loggedInUser = UserModel.fromMap(value.data());
+      this.loggedInUser = AboutUsModel.fromMap(value.data());
       setState(() {});
     });
   }
@@ -53,26 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final loginButton = Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(30),
-      color: Colors.blue,
-      child: MaterialButton(
-        padding: EdgeInsets.fromLTRB(15, 20, 15, 20),
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => FormFour()));
-        },
-        child: Text(
-          "Give Your Feedback!",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 10, color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
+
 
     return Scaffold(
       appBar: AppBar(
@@ -82,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // ),
         // App Bar
         title: Text(
-          "Profile",
+          "About Us",
           style: TextStyle(color: Colors.white),
         ),
 
@@ -96,25 +78,39 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                height: 250,
+                height: 200,
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("${loggedInUser.firstName}",
+                    Text("${loggedInUser.Name}",
                         style: TextStyle(
                           color: Colors.blue,
                           fontSize: 30,
                           fontWeight: FontWeight.w600,
                         )),
-                    Text("${loggedInUser.secondName}",
+                    Text("${loggedInUser.Desc}",
                         style: TextStyle(
                           color: Colors.blue,
                           fontSize: 30,
                           fontWeight: FontWeight.w600,
                         )),
-                    Text("${loggedInUser.email}",
+                    Text("${loggedInUser.Email}",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w600,
+                        )),
+                    SizedBox(height: 20),
+                    Text("${loggedInUser.Profession}",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w600,
+                        )),
+                    SizedBox(height: 20),
+                    Text("${loggedInUser.ContactNo}",
                         style: TextStyle(
                           color: Colors.blue,
                           fontSize: 30,
@@ -142,18 +138,6 @@ class _HomeScreenState extends State<HomeScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: Text(
-                  "Profile",
-                  style: TextStyle(
-                    fontSize: 35,
-                    letterSpacing: 1.5,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
               Container(
                 padding: EdgeInsets.all(10.0),
                 width: MediaQuery.of(context).size.width / 2,
@@ -164,25 +148,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: AssetImage('assets/profile.png'),
+                    image: NetworkImage("${loggedInUser.Image}"),
                   ),
                 ),
               ),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 270, left: 184),
-            child: CircleAvatar(
-              backgroundColor: Colors.blue,
-              child: IconButton(
-                icon: Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          )
+
         ],
       ),
     );

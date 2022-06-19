@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:communityapp/Screens/PostDetail.dart';
 import 'package:flutter/material.dart';
 
 import '../db_model/news.dart';
@@ -56,7 +57,9 @@ class _PostsState extends State<Posts> {
           if (!snapshot.hasData) return CircularProgressIndicator();
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
+
               itemBuilder: (context, int index){
+                DocumentSnapshot documentSnapshot = snapshot.data!.docs[index];
                 // return Text(snapshot.data!.docs[index]['Title']);
                 return Card(
                   elevation: 1.5,
@@ -90,6 +93,7 @@ class _PostsState extends State<Posts> {
                           )
                         ],
                       ),
+                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> PostDetail(documentSnapshot: documentSnapshot)))
                     ),
                   ),
                 );

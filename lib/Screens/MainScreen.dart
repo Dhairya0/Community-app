@@ -1,3 +1,4 @@
+import 'package:communityapp/Screens/AboutUs.dart';
 import 'package:communityapp/Screens/Feedback.dart';
 import 'package:communityapp/Screens/Gallery.dart';
 import 'package:communityapp/Screens/ViewPost.dart';
@@ -50,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
       //     ),
       //   ),
       // ),
-      body: [Posts(),Gallery(), News(),ViewScreen(), EventPage(), FormFour(), HomeScreen()]
+      body: [Posts(),Gallery(), News(),ViewScreen(),  FormFour(), HomeScreen(),AboutUs()]
           .elementAt(_selectedTab),
       bottomNavigationBar: CupertinoTabBar(
         onTap: (index) {
@@ -61,13 +62,14 @@ class _MainScreenState extends State<MainScreen> {
         activeColor: Color(0xff00acee),
         currentIndex: _selectedTab,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.post_add)),
+          BottomNavigationBarItem(icon: Icon(Icons.view_list_sharp)),
           BottomNavigationBarItem(icon: Icon(Icons.image)),
           BottomNavigationBarItem(icon: Icon(Icons.newspaper)),
           BottomNavigationBarItem(icon: Icon(Icons.calendar_today_rounded)),
-          BottomNavigationBarItem(icon: Icon(Icons.calendar_today_rounded)),
+          // BottomNavigationBarItem(icon: Icon(Icons.calendar_today_rounded)),
           BottomNavigationBarItem(icon: Icon(Icons.feedback)),
           BottomNavigationBarItem(icon: Icon(Icons.person)),
+          BottomNavigationBarItem(icon: Icon(Icons.info_outline_rounded)),
         ],
       ),
     );
