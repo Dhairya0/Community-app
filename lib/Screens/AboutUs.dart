@@ -78,7 +78,7 @@ class _AboutUsState extends State<AboutUs> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                height: 200,
+                height: 300,
                 width: double.infinity,
                 margin: EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
@@ -102,14 +102,14 @@ class _AboutUsState extends State<AboutUs> {
                           fontSize: 30,
                           fontWeight: FontWeight.w600,
                         )),
-                    SizedBox(height: 20),
+
                     Text("${loggedInUser.Profession}",
                         style: TextStyle(
                           color: Colors.blue,
                           fontSize: 30,
                           fontWeight: FontWeight.w600,
                         )),
-                    SizedBox(height: 20),
+
                     Text("${loggedInUser.ContactNo}",
                         style: TextStyle(
                           color: Colors.blue,

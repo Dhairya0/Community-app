@@ -53,7 +53,7 @@ class EventPage extends StatelessWidget {
         documentSnapshot['ImageArray']
             .length;
     i++) {
-      _listOfImages.add(NetworkImage(documentSnapshot['ImageArray'][i]));
+      _listOfImages.add(NetworkImage(documentSnapshot["ImageArray"][i]));
     }
     return Scaffold(
       appBar: AppBar(
@@ -72,26 +72,33 @@ class EventPage extends StatelessWidget {
       ),
         body: Column(
             children: [
-            CarouselSlider(
-            items: [
+            CarouselSlider.builder(
 
-            //1st Image of Slider
-
-
-        ],
 
         //Slider Container properties
               options: CarouselOptions(
               height: 180.0,
               enlargeCenterPage: true,
               autoPlay: true,
-              aspectRatio: 16 / 9,
+
               autoPlayCurve: Curves.fastOutSlowIn,
               enableInfiniteScroll: true,
               autoPlayAnimationDuration: Duration(milliseconds: 800),
-              viewportFraction: 0.8,
-              ),
 
+              ),
+              itemCount: _listOfImages.length,
+              itemBuilder: (context, index, realIndex){
+                final _listofImages = _listOfImages[index];
+
+                return  Container(
+                  margin: EdgeInsets.symmetric(horizontal: 12),
+                  color: Colors.grey,
+                  child: Image.network(
+                    documentSnapshot["EventImage"],
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
             ),
               SizedBox(height: 50),
               Text(
@@ -141,7 +148,17 @@ class EventPage extends StatelessWidget {
 
   ])
     );
+
   }
+  // Widget buildImage(String _listofImages , int Index) => Container(
+  //   margin: EdgeInsets.symmetric(horizontal: 12),
+  //   color: Colors.grey,
+  //   child: Image.network(
+  //     _listofImages,
+  //     fit: BoxFit.cover,
+  //   ),
+  // );
+
 
 
 }

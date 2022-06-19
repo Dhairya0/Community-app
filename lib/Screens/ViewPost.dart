@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:communityapp/Screens/PostDetail.dart';
+
 import 'package:flutter/material.dart';
 
 import '../db_model/news.dart';
@@ -60,8 +60,13 @@ class _PostsState extends State<Posts> {
 
               itemBuilder: (context, int index){
                 DocumentSnapshot documentSnapshot = snapshot.data!.docs[index];
+                 return GestureDetector(
+                    onTap: () {
+                      // This Will Call When User Click On ListView Item
+                      showDialogFunc(context, documentSnapshot);
+                    },
                 // return Text(snapshot.data!.docs[index]['Title']);
-                return Card(
+                child: Card(
                   elevation: 1.5,
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -93,14 +98,74 @@ class _PostsState extends State<Posts> {
                           )
                         ],
                       ),
-                        onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> PostDetail(documentSnapshot: documentSnapshot)))
+
                     ),
                   ),
-                );
+                ));
               });
         },
       ),
 
     );
   }
+}
+showDialogFunc(context, dataSnapshot) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return Center(
+        child: Material(
+          type: MaterialType.transparency,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+            ),
+            padding: EdgeInsets.all(15),
+            height: 320,
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Image.network(
+                    dataSnapshot['PostImage'],
+                    width: 400,
+                    height: 200,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  dataSnapshot['Quote'],
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                // Container(
+                //   // width: 200,
+                //   child: Align(
+                //     alignment: Alignment.center,
+                //     child: Text(
+                //       dataSnapshot['Quote'],
+                //       maxLines: 3,
+                //       style: TextStyle(fontSize: 15, color: Colors.grey[500]),
+                //       textAlign: TextAlign.center,
+                //     ),
+                //   ),
+                // ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
 }

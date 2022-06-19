@@ -48,7 +48,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(10.0),
                 borderSide: BorderSide.none)),
       ),
+
     );
+
   }
 
   @override
@@ -74,6 +76,26 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
 
+    final logoutButton = Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(30),
+      color: Colors.blue,
+      child: MaterialButton(
+        padding: EdgeInsets.fromLTRB(15, 20, 15, 20),
+        onPressed: () {
+          // FirebaseAuth.instance.signOut();
+
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginScreen()));
+          Fluttertoast.showToast(msg: "Logged out succesfully");
+          },
+        child: Text(
+          "Logout",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         // leading: IconButton(
@@ -121,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontWeight: FontWeight.w600,
                         )),
                     SizedBox(height: 20),
-                    // loginButton,
+                    logoutButton,
                     // ActionChip(
                     //     label: Text("Logout"),
                     //     onPressed: () {
@@ -170,19 +192,19 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 270, left: 184),
-            child: CircleAvatar(
-              backgroundColor: Colors.blue,
-              child: IconButton(
-                icon: Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
-              ),
-            ),
-          )
+          // Padding(
+          //   padding: EdgeInsets.only(bottom: 270, left: 184),
+          //   child: CircleAvatar(
+          //     backgroundColor: Colors.blue,
+          //     child: IconButton(
+          //       icon: Icon(
+          //         Icons.edit,
+          //         color: Colors.white,
+          //       ),
+          //       onPressed: () {},
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
@@ -190,15 +212,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
 // the logout function
   Future<void> logout() async {
-    // await FirebaseAuth.instance.signOut();
-    // Fluttertoast.showToast(msg: "Logged out succesfully");
-    // Navigator.of(context).pushReplacement(
-    //     MaterialPageRoute(builder: (context) => LoginScreen()));
-    try {
-      _auth.signOut();
-    } catch (e) {
-      print(e);
-    }
+    await FirebaseAuth.instance.signOut();
+    Fluttertoast.showToast(msg: "Logged out succesfully");
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => LoginScreen()));
+    // try {
+    //   _auth.signOut();
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 }
 
