@@ -2,6 +2,7 @@ import 'package:communityapp/Screens/RegisterScreen.dart';
 import 'package:communityapp/Screens/HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'HomeScreen.dart';
@@ -21,6 +22,12 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passController = new TextEditingController();
 
   final _auth = FirebaseAuth.instance;
+  Future<void> secureScreen() async {
+    await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
+  }
+  void initState() {
+    secureScreen();
+  }
   @override
   Widget build(BuildContext context) {
     final emailField = TextFormField(

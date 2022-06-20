@@ -5,7 +5,7 @@ import 'Feedback.dart';
 import '../db_model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'LoginScreen.dart';
 
 class AboutUs extends StatefulWidget {
@@ -14,6 +14,9 @@ class AboutUs extends StatefulWidget {
   @override
   _AboutUsState createState() => _AboutUsState();
 }
+Future<void> secureScreen() async {
+  await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
+}
 
 class _AboutUsState extends State<AboutUs> {
   // User? user = FirebaseAuth.instance.currentUser;
@@ -21,6 +24,7 @@ class _AboutUsState extends State<AboutUs> {
   static final _auth = FirebaseAuth.instance;
   @override
   void initState() {
+    secureScreen();
     super.initState();
     FirebaseFirestore.instance
         .collection("AboutUs")

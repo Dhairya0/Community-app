@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/Screens/LoginScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../db_model/user.dart';
@@ -23,7 +24,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController cnfrmpassController = new TextEditingController();
   final _auth = FirebaseAuth.instance;
   String? errorMessage;
+  Future<void> secureScreen() async {
+    await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
+  }
 
+  void initState() {
+    secureScreen();
+
+
+  }
   @override
   Widget build(BuildContext context) {
     final fnameField = TextFormField(

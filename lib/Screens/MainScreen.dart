@@ -5,6 +5,7 @@ import 'package:communityapp/Screens/ViewPost.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'EventPage.dart';
 import 'HomeScreen.dart';
 import 'ViewScreen.dart';
@@ -19,6 +20,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedTab = 0;
+
+  Future<void> secureScreen() async {
+    await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
+  }
+  void initState() {
+    secureScreen();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

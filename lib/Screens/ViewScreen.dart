@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/model/form.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 // import 'package:communityapp/db_model/data.dart';
 
 class ViewScreen extends StatefulWidget {
@@ -12,12 +13,16 @@ class ViewScreen extends StatefulWidget {
 
 class _ViewScreenState extends State<ViewScreen> {
   var db = FirebaseFirestore.instance.collection("Events").snapshots();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+  Future<void> secureScreen() async {
+    await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
   }
+
+  void initState() {
+    secureScreen();
+    super.initState();
+
+  }
+
 
 
   @override

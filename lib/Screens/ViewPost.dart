@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 
 import '../db_model/news.dart';
 
@@ -15,10 +16,16 @@ class Posts extends StatefulWidget {
 class _PostsState extends State<Posts> {
   var db = FirebaseFirestore.instance.collection("Posts").snapshots();
   NewsModel news = NewsModel();
+  Future<void> secureScreen() async {
+    await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
+  }
+
   void initState() {
+    secureScreen();
     super.initState();
 
   }
+
   // var imgList = [
   //   "assets/news.png",
   //   "assets/news.png",

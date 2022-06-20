@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'Feedback.dart';
 import '../db_model/user.dart';
@@ -18,8 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
   static final _auth = FirebaseAuth.instance;
+  Future<void> secureScreen() async {
+    await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
+  }
   @override
   void initState() {
+    secureScreen();
     super.initState();
     FirebaseFirestore.instance
         .collection("users")
