@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:communityapp/db_model/AboutUs.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'Feedback.dart';
-import '../db_model/user.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
-import 'LoginScreen.dart';
+
 
 class AboutUs extends StatefulWidget {
   const AboutUs({Key? key}) : super(key: key);

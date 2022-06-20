@@ -1,13 +1,14 @@
 import 'package:communityapp/Screens/AboutUs.dart';
 import 'package:communityapp/Screens/Feedback.dart';
 import 'package:communityapp/Screens/Gallery.dart';
+import 'package:communityapp/Screens/ProfilePage.dart';
 import 'package:communityapp/Screens/ViewPost.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
-import 'EventPage.dart';
-import 'HomeScreen.dart';
+
+
 import 'ViewScreen.dart';
 import 'News.dart';
 
@@ -59,7 +60,7 @@ class _MainScreenState extends State<MainScreen> {
       //     ),
       //   ),
       // ),
-      body: [Posts(),Gallery(), News(),ViewScreen(),  FormFour(), HomeScreen(),AboutUs()]
+      body: [Posts(),Gallery(), News(),ViewScreen(),  FormFour(), Profile_screen(),AboutUs()]
           .elementAt(_selectedTab),
       bottomNavigationBar: CupertinoTabBar(
         onTap: (index) {

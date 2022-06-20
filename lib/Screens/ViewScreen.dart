@@ -1,10 +1,10 @@
 import 'package:communityapp/Screens/EventPage.dart';
-import 'package:firebase_database/firebase_database.dart';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:communityapp/model/form.dart';
+
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
-// import 'package:communityapp/db_model/data.dart';
+
 
 class ViewScreen extends StatefulWidget {
   @override

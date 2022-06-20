@@ -6,7 +6,7 @@ import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../db_model/user.dart';
-import 'HomeScreen.dart';
+
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);

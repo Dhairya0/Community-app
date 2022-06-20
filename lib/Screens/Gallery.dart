@@ -1,9 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:communityapp/api/Firebase_api.dart';
 import 'package:communityapp/model/Firebase_file.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'ImagePage.dart';
-// import 'package:firebase_download_example/page/image_page.dart';
+
 import 'package:flutter/material.dart';
 
 class Gallery extends StatefulWidget {

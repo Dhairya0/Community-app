@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
-import '../db_model/user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:fluttertoast/fluttertoast.dart';
 
 
@@ -15,8 +14,8 @@ class FormFour extends StatefulWidget {
 }
 
 class _FormFourState extends State<FormFour> with Validator {
-  User? user = FirebaseAuth.instance.currentUser;
-  UserModel loggedInUser = UserModel();
+  // User? user = FirebaseAuth.instance.currentUser;
+  // UserModel loggedInUser = UserModel();
   final TextEditingController _messageController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();

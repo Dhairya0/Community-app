@@ -1,11 +1,11 @@
 import 'package:communityapp/Screens/RegisterScreen.dart';
-import 'package:communityapp/Screens/HomeScreen.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'HomeScreen.dart';
+
 import 'MainScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -105,8 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+
         },
         child: Text(
           "Login with Google",
@@ -123,8 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+
         },
         child: Text(
           "Login with Facebook",
