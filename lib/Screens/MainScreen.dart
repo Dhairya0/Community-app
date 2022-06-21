@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-
+import 'Login_screen.dart';
 import 'ViewScreen.dart';
 import 'News.dart';
 
@@ -25,8 +26,31 @@ class _MainScreenState extends State<MainScreen> {
   Future<void> secureScreen() async {
     await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
   }
+
   void initState() {
     secureScreen();
+  }
+  BannerAd? bannerAd;
+  bool isLoaded = false;
+
+//change original UnitId while uploading on playstore....
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    bannerAd = BannerAd(
+      size: AdSize.banner,
+      adUnitId: 'ca-app-pub-3940256099942544/6300978111',
+      listener: BannerAdListener(onAdLoaded: (ad) {
+        setState(() {
+          isLoaded = true;
+        });
+        print("Banner Ad Loaded");
+      }, onAdFailedToLoad: (ad, error) {
+        ad.dispose();
+      }),
+      request: AdRequest(),
+    );
+    bannerAd!.load();
   }
   @override
   Widget build(BuildContext context) {
@@ -60,8 +84,30 @@ class _MainScreenState extends State<MainScreen> {
       //     ),
       //   ),
       // ),
-      body: [Posts(),Gallery(), News(),ViewScreen(),  FormFour(), Profile_screen(),AboutUs()]
-          .elementAt(_selectedTab),
+      body: [
+        Posts(),
+        Gallery(),
+        News(),
+        ViewScreen(),
+        FormFour(),
+        Profilescreen(),
+        AboutUs(),
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text('Sign Out'),
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => login_screen())),
+        ),
+        Container(
+            child: isLoaded
+                ? Container(
+              height: 50,
+              child: AdWidget(
+                ad: bannerAd!,
+              ),
+            )
+                : const SizedBox()),
+      ].elementAt(_selectedTab),
       bottomNavigationBar: CupertinoTabBar(
         onTap: (index) {
           setState(() {
@@ -79,6 +125,7 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.feedback)),
           BottomNavigationBarItem(icon: Icon(Icons.person)),
           BottomNavigationBarItem(icon: Icon(Icons.info_outline_rounded)),
+          BottomNavigationBarItem(icon: Icon(Icons.logout)),
         ],
       ),
     );

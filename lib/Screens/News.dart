@@ -13,7 +13,7 @@ class News extends StatefulWidget {
 }
 
 class _NewsState extends State<News> {
-  var db = FirebaseFirestore.instance.collection("news").snapshots();
+  var db = FirebaseFirestore.instance.collection("news_and_update").snapshots();
   NewsModel news = NewsModel();
   Future<void> secureScreen() async {
     await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
@@ -64,6 +64,8 @@ class _NewsState extends State<News> {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, int index){
                 // return Text(snapshot.data!.docs[index]['Title']);
+                Timestamp timestamp1 = snapshot.data!.docs[index]['timestamp']; // timestamp in seconds
+                DateTime date1 = timestamp1.toDate();
                 return Card(
                   elevation: 1.5,
                   child: Padding(
@@ -89,9 +91,25 @@ class _NewsState extends State<News> {
                             children: <Widget>[
                               SizedBox(
                                   width: MediaQuery.of(context).size.width-140,
-                                  child: Text(snapshot.data!.docs[index]['Title'],style: TextStyle(fontSize: 17,color: Colors.blue),)),
+                                  child: Text(snapshot.data!.docs[index]['NewsUpdate'],style: TextStyle(fontSize: 17,color: Colors.blue),)),
                               SizedBox(height: 10,),
-                              Text(snapshot.data!.docs[index]['Desc'],style: TextStyle(color: Colors.blue),)
+                            Text(snapshot.data!.docs[index]['description'],style: TextStyle(fontSize: 17,color: Colors.blue),),
+                              SizedBox(height: 10,),
+                              Row(
+                                children: <Widget>[
+                                  Icon(Icons.calendar_today_rounded),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    date1.toString() ,
+                                    style: TextStyle(
+                                        color: Colors.blue, fontSize: 15),
+                                  )
+
+                                ],
+
+                              ),
                             ],
                           )
                         ],

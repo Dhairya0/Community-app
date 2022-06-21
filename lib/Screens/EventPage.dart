@@ -53,14 +53,18 @@ class EventPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _listOfImages = [];
-    for (int i = 0;
-    i <
-        documentSnapshot['ImageArray']
-            .length;
-    i++) {
-      _listOfImages.add(NetworkImage(documentSnapshot["ImageArray"][i]));
-    }
+    Timestamp timestamp1 = documentSnapshot['from']; // timestamp in seconds
+    DateTime date1 = timestamp1.toDate();
+    Timestamp timestamp2 = documentSnapshot['to']; // timestamp in seconds
+    DateTime date2 = timestamp2.toDate();
+    // _listOfImages = [];
+    // for (int i = 0;
+    // i <
+    //     documentSnapshot['ImageArray']
+    //         .length;
+    // i++) {
+    //   _listOfImages.add(NetworkImage(documentSnapshot["ImageArray"][i]));
+    // }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -69,7 +73,7 @@ class EventPage extends StatelessWidget {
         ),
         // App Bar
         title: Text(
-          documentSnapshot["Title"],
+          documentSnapshot["title"],
           style: TextStyle(color: Colors.blue),
         ),
 
@@ -92,15 +96,15 @@ class EventPage extends StatelessWidget {
               autoPlayAnimationDuration: Duration(milliseconds: 800),
 
               ),
-              itemCount: _listOfImages.length,
+              itemCount: 3,
               itemBuilder: (context, index, realIndex){
-                final _listofImages = _listOfImages[index];
+                // final _listofImages = _listOfImages[index];
 
                 return  Container(
                   margin: EdgeInsets.symmetric(horizontal: 12),
                   color: Colors.grey,
                   child: Image.network(
-                    documentSnapshot["EventImage"],
+                    documentSnapshot["ImageUrl"],
                     fit: BoxFit.cover,
                   ),
                 );
@@ -108,13 +112,13 @@ class EventPage extends StatelessWidget {
             ),
               SizedBox(height: 50),
               Text(
-                  documentSnapshot["Title"],
+                  documentSnapshot["title"],
                   style: TextStyle(color: Colors.blue, fontSize: 45.0)
               ),
               SizedBox(height: 30),
               Padding(padding: EdgeInsets.fromLTRB(20, 20, 20, 30),
                 child: Text(
-                  documentSnapshot["Desc"],
+                  documentSnapshot["description"],
                   style: TextStyle(
                     height: 1.5,
                   ),
@@ -129,11 +133,30 @@ class EventPage extends StatelessWidget {
                       width: 8,
                     ),
                     Text(
-                      documentSnapshot["Date"],
+                      date1.toString()  ,
                       style: TextStyle(
                           color: Colors.blue, fontSize: 15),
                     )
+
                   ],
+
+                ),
+              ),
+              Padding(padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.calendar_today_rounded),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      date2.toString()  ,
+                      style: TextStyle(
+                          color: Colors.blue, fontSize: 15),
+                    )
+
+                  ],
+
                 ),
               ),
               Padding(padding: EdgeInsets.fromLTRB(20, 0, 0,0),
@@ -144,7 +167,7 @@ class EventPage extends StatelessWidget {
                       width: 8,
                     ),
                     Text(
-                      documentSnapshot["Address"] ,
+                      documentSnapshot['address'] ,
                       style: TextStyle(
                           color: Colors.blue, fontSize: 15),
                     )

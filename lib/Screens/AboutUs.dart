@@ -59,20 +59,17 @@ class _AboutUsState extends State<AboutUs> {
 
 
     return Scaffold(
-      appBar: AppBar(
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back, color: Colors.blue),
-        //   onPressed: () => Navigator.of(context).pop(),
-        // ),
-        // App Bar
-        title: Text(
-          "About Us",
-          style: TextStyle(color: Colors.white),
-        ),
-
-        elevation: 0,
-        backgroundColor: Colors.blue,
-      ),
+      // appBar: AppBar(
+      //
+      //
+      //   title: Text(
+      //     "About Us",
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      //
+      //   elevation: 0,
+      //   backgroundColor: Colors.blue,
+      // ),
       body: Stack(
         alignment: Alignment.center,
         children: [

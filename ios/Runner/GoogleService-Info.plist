@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>384715221140-0q8307fmhriqln1adgri1cpk5ba850gl.apps.googleusercontent.com</string>
+	<string>393516746346-9r1pr8hm97ebvra2tgpt79f2o0qbr3ot.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.384715221140-0q8307fmhriqln1adgri1cpk5ba850gl</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>384715221140-uvjlgcs0oj9ot2oq0bo62gv8mnj0up5d.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.393516746346-9r1pr8hm97ebvra2tgpt79f2o0qbr3ot</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBHs3LQNa8kS4vSCaXEqxEgmW70hl3S0rk</string>
+	<string>AIzaSyB7RQudSj7Sga5ju8H-tUt3Ty6qKrfksVE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>384715221140</string>
+	<string>393516746346</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.communityapp</string>
 	<key>PROJECT_ID</key>
-	<string>community-app-81ff0</string>
+	<string>community-app-fc439</string>
 	<key>STORAGE_BUCKET</key>
-	<string>community-app-81ff0.appspot.com</string>
+	<string>community-app-fc439.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:384715221140:ios:7430280b0466c16186ec81</string>
+	<string>1:393516746346:ios:f6f564b7dfa3d8d66a2c13</string>
 </dict>
 </plist>

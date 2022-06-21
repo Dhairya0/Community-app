@@ -135,11 +135,11 @@ class _FormFourState extends State<FormFour> with Validator {
       child: RaisedButton(
         onPressed: ()
           {
-            feedbackModel.Name = _nameController.text;
-            feedbackModel.Email = _emailController.text;
-            feedbackModel.Desc = _messageController.text;
+            feedbackModel.name = _nameController.text;
+            feedbackModel.email = _emailController.text;
+            feedbackModel.suggestion = _messageController.text;
             databaseRef
-                .collection('Feedback')
+                .collection('suggestions')
                 .doc()
                 .set(feedbackModel.toMap());
             Fluttertoast.showToast(msg: "Your Suggestion Noted");

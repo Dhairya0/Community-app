@@ -1,17 +1,17 @@
 class FeedbackModel {
-  String? Name;
-  String? Email;
-  String? Desc;
+  String? name;
+  String? email;
+  String? suggestion;
 
 
-  FeedbackModel({this.Name, this.Email, this.Desc});
+  FeedbackModel({this.name, this.email, this.suggestion});
 
   // receiving data from server
   factory FeedbackModel.fromMap(map) {
     return FeedbackModel(
-      Name: map['Name'],
-      Email: map['Email'],
-      Desc: map['Desc'],
+      name: map['name'],
+      email: map['email'],
+      suggestion: map['suggestion'],
 
     );
   }
@@ -19,9 +19,9 @@ class FeedbackModel {
   // sending data to our server
   Map<String, dynamic> toMap() {
     return {
-      'Name': Name,
-      'Email': Email,
-      'Desc': Desc,
+      'name': name,
+      'email': email,
+      'suggestion': suggestion,
 
     };
   }

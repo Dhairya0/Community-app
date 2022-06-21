@@ -1,12 +1,17 @@
 import 'package:communityapp/Screens/LoginScreen.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:communityapp/Screens/Login_screen.dart';
+import 'package:communityapp/provider/event_provider.dart';
+import 'package:communityapp/model/home_view_modelUploadImage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await Firebase.initializeApp();
-
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,20 +20,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Community-App',
+    ///Get.lazyPut(() => DataClass());
+    return MultiProvider(
+      child: MaterialApp(
+        title: 'community_app',
+        // themeMode: ThemeMode.dark,
+        // darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.blueAccent),
         theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: const LoginScreen());
+        debugShowCheckedModeBanner: false,
+        home: login_screen(),
+      ),
+      providers: [
+        ChangeNotifierProvider(create: (_) => HomeViewModel()),
+        ChangeNotifierProvider(create: (context) => EventProvider()),
+      ],
+    );
   }
 }

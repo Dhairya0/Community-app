@@ -14,7 +14,7 @@ class Posts extends StatefulWidget {
 }
 
 class _PostsState extends State<Posts> {
-  var db = FirebaseFirestore.instance.collection("Posts").snapshots();
+  var db = FirebaseFirestore.instance.collection("posts").snapshots();
   NewsModel news = NewsModel();
   Future<void> secureScreen() async {
     await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
@@ -88,7 +88,7 @@ class _PostsState extends State<Posts> {
                                 borderRadius: BorderRadius.circular(60/2),
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(snapshot.data!.docs[index]['PostImage'])
+                                    image: NetworkImage(snapshot.data!.docs[index]['postUrl'])
                                 )
                             ),
                           ),
@@ -98,7 +98,7 @@ class _PostsState extends State<Posts> {
                             children: <Widget>[
                               SizedBox(
                                   width: MediaQuery.of(context).size.width-140,
-                                  child: Text(snapshot.data!.docs[index]['Quote'],style: TextStyle(fontSize: 17,color: Colors.blue),)),
+                                  child: Text(snapshot.data!.docs[index]['description'],style: TextStyle(fontSize: 17,color: Colors.blue),)),
                               SizedBox(height: 10,),
                               // Text(snapshot.data!.docs[index]['Desc'],style: TextStyle(color: Colors.blue),)
                             ],
@@ -137,7 +137,7 @@ showDialogFunc(context, dataSnapshot) {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: Image.network(
-                    dataSnapshot['PostImage'],
+                    dataSnapshot['postUrl'],
                     width: 400,
                     height: 200,
                   ),
@@ -146,7 +146,7 @@ showDialogFunc(context, dataSnapshot) {
                   height: 10,
                 ),
                 Text(
-                  dataSnapshot['Quote'],
+                  dataSnapshot['description'],
                   style: TextStyle(
                     fontSize: 25,
                     color: Colors.blue,

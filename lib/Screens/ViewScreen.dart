@@ -12,7 +12,7 @@ class ViewScreen extends StatefulWidget {
 }
 
 class _ViewScreenState extends State<ViewScreen> {
-  var db = FirebaseFirestore.instance.collection("Events").snapshots();
+  var db = FirebaseFirestore.instance.collection("event").snapshots();
   Future<void> secureScreen() async {
     await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
   }
@@ -46,6 +46,10 @@ class _ViewScreenState extends State<ViewScreen> {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, int index){
                 DocumentSnapshot documentSnapshot = snapshot.data!.docs[index];
+                Timestamp timestamp1 = snapshot.data!.docs[index]['from']; // timestamp in seconds
+                DateTime date1 = timestamp1.toDate();
+                Timestamp timestamp2 = snapshot.data!.docs[index]['to']; // timestamp in seconds
+                DateTime date2 = timestamp2.toDate();
                 // String Desc = snapshot.data!.docs[index]['Desc'];
                 // String Location = snapshot.data!.docs[index]['Location'];
                 // String Date = snapshot.data!.docs[index]['Date'];
@@ -67,7 +71,7 @@ class _ViewScreenState extends State<ViewScreen> {
                                 borderRadius: BorderRadius.circular(60/2),
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(documentSnapshot['EventImage'])
+                                    image: NetworkImage(documentSnapshot['ImageUrl'])
                                 )
                             ),
                           ),
@@ -77,7 +81,7 @@ class _ViewScreenState extends State<ViewScreen> {
                             children: <Widget>[
                               SizedBox(
                                   width: MediaQuery.of(context).size.width-140,
-                                  child: Text(snapshot.data!.docs[index]['Title'],style: TextStyle(fontSize: 17,color: Colors.blue),)),
+                                  child: Text(snapshot.data!.docs[index]['title'],style: TextStyle(fontSize: 17,color: Colors.blue),)),
                               SizedBox(height: 5,),
                               // Icon(Icons.calendar_month),
                               // Text(snapshot.data!.docs[index]['Date'],style: TextStyle(color: Colors.blue),),
@@ -88,18 +92,21 @@ class _ViewScreenState extends State<ViewScreen> {
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    Text(snapshot.data!.docs[index]['Date'],style: TextStyle(color: Colors.blue),),
+                                    Text(date1.toString(),style: TextStyle(color: Colors.blue),),
+                                    // Text("-",style: TextStyle(color: Colors.blue),),
+                                    // Text(date2.toString(),style: TextStyle(color: Colors.blue),),
+
                                   ],
                                 ),
                               ),
                               SizedBox(
                                 child: Row(
                                   children: <Widget>[
-                                    Icon(Icons.location_on),
+                                    Icon(Icons.calendar_today_rounded),
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    Text(snapshot.data!.docs[index]['Location'],style: TextStyle(color: Colors.blue),),
+                                    Text(date2.toString(),style: TextStyle(color: Colors.blue),),
                                   ],
                                 ),
                               ),

@@ -34,7 +34,7 @@ class _GalleryState extends State<Gallery> {
     secureScreen();
     super.initState();
 
-    futureFiles = FirebaseApi.listAll('/Pictures');
+    futureFiles = FirebaseApi.listAll('/UploadImage');
   }
 
   @override
